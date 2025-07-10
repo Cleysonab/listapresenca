@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presença - Evento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 Confirmação de Presença</h1>
+            <p>Por favor, confirme sua presença no nosso evento especial</p>
+        </header>
+
+        <div class="login-section" id="loginSection">
+            <div class="card">
+                <h2>Acesso do Convidado</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="guestCode">Código do Convite:</label>
+                        <input type="text" id="guestCode" placeholder="Digite seu código" required>
+                        <small>Verifique seu convite para encontrar o código</small>
+                    </div>
+                    <button type="submit">Acessar</button>
+                </form>
+                
+                <div class="admin-link">
+                    <a href="#" onclick="showAdminLogin()">Área do Organizador</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-login" id="adminLogin" style="display: none;">
+            <div class="card">
+                <h2>Acesso do Organizador</h2>
+                <form id="adminForm">
+                    <div class="form-group">
+                        <label for="adminPassword">Senha:</label>
+                        <input type="password" id="adminPassword" placeholder="Digite a senha" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="showGuestLogin()">Voltar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="guest-section" id="guestSection" style="display: none;">
+            <div class="card">
+                <div class="guest-header">
+                    <h2 id="guestName"></h2>
+                    <button onclick="logout()" class="logout-btn">Sair</button>
+                </div>
+                
+                <div class="guest-list">
+                    <h3>Seus Convidados:</h3>
+                    <div id="guestList"></div>
+                </div>
+                
+                <button onclick="saveConfirmations()" class="save-btn" id="saveBtn">Salvar Confirmações</button>
+                
+                <div class="success-message" id="successMessage" style="display: none;">
+                    ✅ Confirmações salvas com sucesso!
+                </div>
+
+                <div class="loading-message" id="loadingMessage" style="display: none;">
+                    🔄 Salvando...
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-section" id="adminSection" style="display: none;">
+            <div class="card">
+                <div class="admin-header">
+                    <h2>Painel do Organizador</h2>
+                    <div>
+                        <button onclick="refreshData()" class="refresh-btn">🔄 Atualizar</button>
+                        <button onclick="logout()" class="logout-btn">Sair</button>
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3 id="totalConfirmed">0</h3>
+                        <p>Confirmados</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalPending">0</h3>
+                        <p>Pendentes</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalGuests">0</h3>
+                        <p>Total de Convidados</p>
+                    </div>
+                </div>
+                
+                <div class="confirmations-list">
+                    <h3>Lista de Confirmações:</h3>
+                    <div id="confirmationsList"></div>
+                </div>
+                
+                <button onclick="exportData()" class="export-btn">Exportar Lista</button>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Carregando dados...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
