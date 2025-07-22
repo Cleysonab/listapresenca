@@ -453,23 +453,33 @@ function setupEventListeners() {
 }
 
 // Inicializar dados no Firebase - FORÇANDO REINICIALIZAÇÃO
+
 function initializeFirebaseData() {
-    console.log("🔄 Forçando reinicialização dos dados no Firebase...");
-    
-    // SEMPRE salvar os dados iniciais (mesmo que já existam)
-    database.ref("guestConfirmations").set(guestsData)
-        .then(() => {
-            console.log("✅ Dados iniciais salvos/atualizados no Firebase com sucesso!");
-            showSuccessMessage("Sistema inicializado! Todos os dados foram salvos no banco.");
+    console.log("🔄 Verificando dados existentes no Firebase...");
+
+    database.ref("guestConfirmations").once("value")
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                guestsData = snapshot.val(); // Carrega dados existentes
+                console.log("✅ Dados carregados do Firebase.");
+            } else {
+                // Se não existir, cria os dados iniciais
+                return database.ref("guestConfirmations").set(guestsData)
+                    .then(() => {
+                        console.log("✅ Dados iniciais salvos no Firebase com sucesso!");
+                        showSuccessMessage("Sistema inicializado! Dados criados no banco.");
+                    });
+            }
         })
         .catch((error) => {
-            console.error("❌ Erro ao inicializar Firebase:", error);
+            console.error("❌ Erro ao conectar com o Firebase:", error);
             alert("Erro ao conectar com o servidor. Tente novamente.");
         })
         .finally(() => {
             showLoadingOverlay(false);
         });
 }
+
 
 function showLoadingOverlay(show) {
     document.getElementById("loadingOverlay").style.display = show ? "block" : "none";
