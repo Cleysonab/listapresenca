@@ -1,12 +1,11 @@
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBWtQ_pWx4BGZHN8mLN3k-vmEI3Ox6UUfI",
-  authDomain: "uploadfotos-1f939.firebaseapp.com",
-  databaseURL: "https://uploadfotos-1f939-default-rtdb.firebaseio.com",
-  projectId: "uploadfotos-1f939",
-  storageBucket: "uploadfotos-1f939.firebasestorage.app",
-  messagingSenderId: "1059891342785",
-  appId: "1:1059891342785:web:c5340b59bf075986a9d340"
+  apiKey: "AIzaSyAWH-UCDh_S7gTibN_dk7-he0A9lV6U9XY",
+  authDomain: "listapresenca-bad7e.firebaseapp.com",
+  projectId: "listapresenca-bad7e",
+  storageBucket: "listapresenca-bad7e.firebasestorage.app",
+  messagingSenderId: "454094319427",
+  appId: "1:454094319427:web:e4c1c01940605fb3d2c9f6"
 };
 
 // Inicializar Firebase
